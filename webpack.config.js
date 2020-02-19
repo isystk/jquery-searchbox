@@ -6,6 +6,8 @@ const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const CopyFilePlugin = require("copy-webpack-plugin");
+const WriteFilePlugin = require("write-file-webpack-plugin");
 
 const webpackConfig = {
   context: src,
@@ -52,22 +54,6 @@ const webpackConfig = {
                   }
               }
           ]
-      },
-      {
-          test: /jquery-searchbox\.js$/,
-          use: [
-              {
-                  loader: 'file-loader',
-                  options: {
-                      name: '[name].[ext]',
-                      outputPath : 'js/',
-                      publicPath : function(path){
-                          return '../js/' + path;
-                      },
-                      esModule: false
-                  }
-              }
-          ]
       }
     ]
   },
@@ -77,7 +63,18 @@ const webpackConfig = {
     new HtmlWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: 'css/common.css' // Dist
-    })
+    }),
+    new CopyFilePlugin(
+      [
+        {
+          context: "assets/js",
+          from: "jquery-searchbox.js",
+          to: "js"
+        }
+      ],
+      { copyUnmodified: true }
+    ),
+    new WriteFilePlugin()
   ],
   optimization: {
     minimizer: [
