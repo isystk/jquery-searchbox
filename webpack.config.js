@@ -52,6 +52,22 @@ const webpackConfig = {
                   }
               }
           ]
+      },
+      {
+          test: /jquery-searchbox\.js$/,
+          use: [
+              {
+                  loader: 'file-loader',
+                  options: {
+                      name: '[name].[ext]',
+                      outputPath : 'js/',
+                      publicPath : function(path){
+                          return '../js/' + path;
+                      },
+                      esModule: false
+                  }
+              }
+          ]
       }
     ]
   },
