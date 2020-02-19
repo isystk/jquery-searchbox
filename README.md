@@ -4,7 +4,7 @@ jquery-searchbox
 ## Description
 
 ## Demo
-https://design.isystk.com/jquery-searchbox/
+https://demo.isystk.com/jquery-searchbox/
 
 ## VS. 
 
