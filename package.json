@@ -1,0 +1,36 @@
+{
+  "name": "jquery-searchbox",
+  "version": "1.0.0",
+  "description": "jquery-searchbox",
+  "main": "index.js",
+  "scripts": {
+    "generate": "npx webpack --mode production",
+    "dev": "npx webpack-dev-server --mode development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/isystk/jquery-searchbox.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/isystk/jquery-searchbox/issues"
+  },
+  "homepage": "https://github.com/isystk/jquery-searchbox#readme",
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.12.1",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.4.2",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.3"
+  },
+  "dependencies": {
+    "file-loader": "^5.0.2"
+  }
+}

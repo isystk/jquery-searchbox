@@ -1,0 +1,11 @@
+
+# design
+RewriteEngine On
+RewriteBase /jquery-searchbox/
+RewriteCond %{REQUEST_URI} !/jquery-searchbox/dist
+RewriteCond %{REQUEST_URI} !/jquery-searchbox/git-hook.php
+RewriteRule ^(.*)$ dist/$1 [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /jquery-searchbox/ [L,R=301]
+

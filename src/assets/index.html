@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="robots" content="noindex, nofollow">
+  <title>jquery-searchbox</title>
+</head>
+<body class="column2 side-left">
+  <div class="wrap">
+    <header>
+      <div class="header-image">
+        <div class="logo">検索機能付き セレクトボックス</div>
+      </div>
+    </header>
+    <div class="content">
+      <main>
+        <article class="detail" >
+          <div class="entry-header">
+            <h1 class="entry-title"><a href="#">検索機能付き セレクトボックス</a></h1>
+          </div>
+          <div class="entry-content">
+            <h2 id="demo">Demo</h2>
+            
+            <h4>入力式セレクトボックス</h4>
+            <div class="select-wrap">
+              <select name="address" class="js-searchBox">
+                <option value="">-----</option>
+                <option value="1">Python</option>
+                <option value="2">Java</option>
+                <option value="3">Ruby</option>
+                <option value="4">C/C++</option>
+                <option value="5">C#</option>
+                <option value="6">JavaScript</option>
+                <option value="7">PHP</option>
+                <option value="8">Swift</option>
+                <option value="9">Scala</option>
+                <option value="10">R</option>
+                <option value="11">Go</option>
+                <option value="12">VisualBasic.NET</option>
+                <option value="13">Kotlin</option>
+              </select>
+            </div>
+  
+            <h2 id="usage">使い方</h2>
+            <p>jQueryでセレクトボックスを指定してsearchBoxを呼び出すと検索機能付きのセレクトボックスになります。以下の例はオプションでセレクトボックスの表示幅を指定しています。</p>
+            <h4>Javascript</h4>
+            <pre class="code">
+// 検索機能付きセレクトボックス
+$('<セレクトボックスのセレクタ>>').searchBox({elementWidth: '250'});
+</pre>
+            <h4>Css</h4>
+            <pre class="code">
+.searchboxElement{
+  background-color: white;
+  border: 1px solid #aaa;
+  position: absolute;
+  max-height: 114px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+  line-height: 23px;
+  list-style: none;
+  z-index: 1;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.searchboxElement span{
+  padding: 0 5px;
+}
+.searchboxElement::-webkit-scrollbar {
+  display:none;
+}
+.searchboxElement li{
+  background-color: white;
+  color: black;
+}
+.searchboxElement li:hover{
+  background-color: #50a0ff;
+  color: white;
+}
+.searchboxElement li.selected{
+  background-color: #50a0ff;
+  color: white;
+}
+</pre>
+            <h2 id="source">ソースコード</h2>
+            <a href="https://github.com/tlb-iseyoshitaka/jquery-searchbox">https://github.com/tlb-iseyoshitaka/jquery-searchbox</a>
+            
+          </div>
+        </article>
+      </main>
+      <aside class="side-left">
+        　<div class="sidebar-wrapper">
+          　<h4 class="sidebar-title">メニュー</h4>
+          <ul>
+            <li><a href="#demo">DEMO</a></li>
+            <li><a href="#usage">使い方</a></li>
+            <li><a href="#source">ソースコード</a></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+    <footer class="footer">
+      <section class="footer1"></section>
+      <section class="footer2">© 2020 isystk.com</section>
+    </footer>
+  </div>
+</body>
+</html>
