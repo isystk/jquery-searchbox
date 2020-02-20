@@ -41,7 +41,8 @@
 
 			// ダミーリストの表示幅をセレクトボックスにあわせる
 			var refineTextWidth = (settings.elementWidth) ? settings.elementWidth : self.width();
-			$('.searchBoxElement').css('width', refineTextWidth);
+			refineText.css('width', refineTextWidth);
+			parent.find('.searchBoxElement').css('width', refineTextWidth);
 
 			// 元のセレクトボックスは非表示にする
 			self.hide();
@@ -54,24 +55,24 @@
 					filterTarget = filterTarget.filter(function(){
 						return $(this).text().match(matcher);
 					});
-					$('.searchBoxElement').empty();
-					$('.searchBoxElement').html(filterTarget);
-					$('.searchBoxElement').show();
+					parent.find('.searchBoxElement').empty();
+					parent.find('.searchBoxElement').html(filterTarget);
+					parent.find('.searchBoxElement').show();
 				} else {
-					$('.searchBoxElement').empty();
-					$('.searchBoxElement').html(visibleTarget.slice(0, settings.optionMaxSize).join(''));
-					$('.searchBoxElement').show();
+					parent.find('.searchBoxElement').empty();
+					parent.find('.searchBoxElement').html(visibleTarget.slice(0, settings.optionMaxSize).join(''));
+					parent.find('.searchBoxElement').show();
 				}
 				
 				// 選択中のLIタグの背景色を変更します。
 				var selectedOption = self.find('option:selected');
 				if(selectedOption){
-					$('.searchBoxElement').find('li').removeClass('selected');
-					$('.searchBoxElement').find('li[data-searchval="' + selectedOption.val() + '"]').addClass('selected');
+					parent.find('.searchBoxElement').find('li').removeClass('selected');
+					parent.find('.searchBoxElement').find('li[data-searchval="' + selectedOption.val() + '"]').addClass('selected');
 				}
 				
 				// ダミーリスト選択時
-				$('.searchBoxElement').find('li').click(function(e){
+				parent.find('.searchBoxElement').find('li').click(function(e){
 					e.preventDefault();
 					// e.stopPropagation();
 					var li = $(this),
@@ -124,7 +125,7 @@
 				}
 
 				// ダミーリストをリフレッシュ
-				$('.searchBoxElement').hide();
+				parent.find('.searchBoxElement').hide();
 				changeSearchBoxElement();
 				
 			});
@@ -134,7 +135,7 @@
 				if($(e.target).hasClass('refineText')){
 					return;
 				}
-				$('.searchBoxElement').hide();
+				parent.find('.searchBoxElement').hide();
 				if (settings.mode !== MODE.TAG) {
 					var selectedOption = self.find('option:selected');
 					searchWord = selectedOption.text();
