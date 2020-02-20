@@ -40,7 +40,8 @@
 			self.after($('<ul class="searchBoxElement"></ul>').hide());
 
 			// ダミーリストの表示幅をセレクトボックスにあわせる
-			var refineTextWidth = self.width();
+			var refineTextWidth = (settings.elementWidth) ? settings.elementWidth : self.width();
+			$('.searchBoxElement').css('width', refineTextWidth);
 
 			// 元のセレクトボックスは非表示にする
 			self.hide();
@@ -158,6 +159,7 @@
 
 	$.fn.searchBox.defaults = {
 		selectCallback: null, // 選択後に呼ばれるコールバック
+		elementWidth: null, // セレクトボックスの表示幅
 		optionMaxSize: 100, // セレクトボックス内に表示する最大数
 		mode: MODE.INPUT // 表示モード
 	};

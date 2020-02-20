@@ -65,7 +65,7 @@ $(function() {
 	});
 	
 	// 検索機能付きセレクトボックス
-	$('.js-searchBox').searchBox();
+	$('.js-searchBox').searchBox({elementWidth: '227px'});
 
 
 });
