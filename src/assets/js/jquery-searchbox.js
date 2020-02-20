@@ -59,10 +59,10 @@
 						return $(this).text().match(matcher);
 					});
 					$('.searchBoxElement').empty();
-					$('.searchBoxElement').html(filterTarget.slice(0,100));
+					$('.searchBoxElement').html(filterTarget.slice(0, settings.optionMaxSize));
 					$('.searchBoxElement').show();
 				} else {
-					$('.searchBoxElement').html(visibleTarget.slice(0,100));
+					$('.searchBoxElement').html(visibleTarget.slice(0, settings.optionMaxSize));
 					$('.searchBoxElement').show();
 				}
 				
