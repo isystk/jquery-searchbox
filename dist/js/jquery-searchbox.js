@@ -36,65 +36,61 @@
 			}
 
 			// セレクトボックスの代わりに表示するダミーリストを作成
-			var searchboxElement = $('<ul class="searchboxElement"></ul>');
-			searchboxElement.append(_.map(self.find('option'), function(obj) {
-				return '<li data-selected="off" data-searchval="' + $(obj).val() + '"><span>' + $(obj).text() + '</span></li>';
-			}).join(''));
-			searchboxElement.hide();
-			self.after(searchboxElement);
+			var visibleTarget = self.find('option').map(function(i, e) {
+				return '<li data-selected="off" data-searchval="' + $(e).val() + '"><span>' + $(e).text() + '</span></li>';
+			}).get();
+			self.after($('<ul class="searchBoxElement"></ul>').hide());
 
 			// ダミーリストの表示幅をセレクトボックスにあわせる
 			var refineTextWidth = (settings.elementWidth) ? settings.elementWidth : self.width();
-			searchboxElement.css({
+			$('.searchBoxElement').css({
 				'min-width' : refineTextWidth + 'px'
 			});
 
 			// 元のセレクトボックスは非表示にする
 			self.hide();
 
-			// ダミーリスト選択時
-			searchboxElement.find('li').click(function(e){
-				e.preventDefault();
-				// e.stopPropagation();
-				var li = $(this),
-					searchval = li.data('searchval');
-				self.val(searchval).change();
-				parent.find('li').attr('data-selected', 'off');
-				li.attr('data-selected', 'on');
-			});
-
 			// ダミーリストを検索条件で絞り込みます。
-			var changesearchboxElement = function() {
-				var visibleTarget = searchboxElement.find('li');
-				visibleTarget.show();
+			var changeSearchBoxElement = function() {
 				if (searchWord !== '') {
-					var matcher = searchWord.replace(/\\/g, '\\\\');
-					visibleTarget = searchboxElement.find('li').filter(function(){
+					var matcher = new RegExp(searchWord.replace(/\\/g, '\\\\'), "i");
+					var filterTarget = $(visibleTarget.slice().join('')); // 配列のコピー
+					filterTarget = filterTarget.filter(function(){
 						return $(this).text().match(matcher);
 					});
-					searchboxElement.find('li').hide();
-					visibleTarget.show();
+					$('.searchBoxElement').empty();
+					$('.searchBoxElement').html(filterTarget.slice(0,100));
+					$('.searchBoxElement').show();
+				} else {
+					$('.searchBoxElement').html(visibleTarget.slice(0,100));
+					$('.searchBoxElement').show();
 				}
 				
 				// 選択中のLIタグの背景色を変更します。
 				var selectedOption = self.find('option:selected');
 				if(selectedOption){
-					searchboxElement.find('li').removeClass('selected');
-					searchboxElement.find('li[data-searchval="' + selectedOption.val() + '"]').addClass('selected');
+					$('.searchBoxElement').find('li').removeClass('selected');
+					$('.searchBoxElement').find('li[data-searchval="' + selectedOption.val() + '"]').addClass('selected');
 				}
 				
-				if (0 < visibleTarget.length) {
-					searchboxElement.show();
-				} else {
-					searchboxElement.hide();
-				}
+				// ダミーリスト選択時
+				$('.searchBoxElement').find('li').click(function(e){
+					e.preventDefault();
+					// e.stopPropagation();
+					var li = $(this),
+						searchval = li.data('searchval');
+					self.val(searchval).change();
+					parent.find('li').attr('data-selected', 'off');
+					li.attr('data-selected', 'on');
+				});
+
 			};
 
 			// keyup時のファンクション
 			refineText.keyup(function(e){
 				searchWord = $(this).val();
 				// ダミーリストをリフレッシュ
-				changesearchboxElement();
+				changeSearchBoxElement();
 			});
 
 			// セレクトボックス変更時
@@ -112,7 +108,7 @@
 				}
 			});
 
-			// 絞り込み入力欄をクリックした場合はダミーリストを表示
+			// テキストボックスをクリックした場合はダミーリストを表示する
 			refineText.click(function(e) {
 				e.preventDefault();
 
@@ -131,17 +127,17 @@
 				}
 
 				// ダミーリストをリフレッシュ
-				$('.searchboxElement').hide();
-				changesearchboxElement();
+				$('.searchBoxElement').hide();
+				changeSearchBoxElement();
 				
 			});
 			
-			// 表示中のダミーリストを非表示
+			// セレクトボックスの外をクリックした場合はダミーリストを非表示にする。
 			$(document).click(function(e){
 				if($(e.target).hasClass('refineText')){
 					return;
 				}
-				searchboxElement.hide();
+				$('.searchBoxElement').hide();
 				if (settings.mode !== MODE.TAG) {
 					var selectedOption = self.find('option:selected');
 					searchWord = selectedOption.text();
@@ -165,9 +161,10 @@
 	};
 
 	$.fn.searchBox.defaults = {
-		selectCallback: null,
-		elementWidth: null,
-		mode: MODE.INPUT
+		selectCallback: null, // 選択後に呼ばれるコールバック
+		elementWidth: null, // セレクトボックスの表示幅
+		optionMaxSize: 100, // セレクトボックス内に表示する最大数
+		mode: MODE.INPUT // 表示モード
 	};
 
 })(jQuery);
