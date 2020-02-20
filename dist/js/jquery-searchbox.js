@@ -1,10 +1,10 @@
 (function($) {
-	/*
-	 * 検索機能付き セレクトボックス
-	 *
-	 * Copyright (c) 2020 iseyoshitaka
-	 */
-	$.fn.searchBox = function(opts) {
+		/*
+		* 検索機能付き セレクトボックス
+		*
+		* Copyright (c) 2020 iseyoshitaka
+		*/
+		$.fn.searchBox = function(opts) {
 
 		// 引数に値が存在する場合、デフォルト値を上書きする
 		var settings = $.extend({}, $.fn.searchBox.defaults, opts);
@@ -16,15 +16,8 @@
 				searchWord = ''; // 絞り込み文字列
 			
 			// 絞り込み検索用のテキスト入力欄の追加
-			self.before('<input type="text" class="refineText" />');
+			self.before('<input type="text" class="refineText formTextbox" />');
 			var refineText = parent.find('.refineText');
-			refineText.css({
-				'width': '250px',
-				'height': '40px',
-				'padding': '0px',
-				'font-family': 'normal',
-				'text-indent': '5px'
-			});
 			if (settings.mode === MODE.NORMAL) {
 				refineText.attr('readonly', 'readonly');
 			}
@@ -33,19 +26,21 @@
 			var selectedOption = self.find('option:selected');
 			if(selectedOption){
 				refineText.val(selectedOption.text());
+				if (selectedOption.val() === '') {
+					if (settings.mode === MODE.TAG) {
+						refineText.val("");
+					}
+				}
 			}
 
 			// セレクトボックスの代わりに表示するダミーリストを作成
-			var visibleTarget = self.find('option').map(function(i, e) {
+			var visibleTarget =self.find('option').map(function(i, e) {
 				return '<li data-selected="off" data-searchval="' + $(e).val() + '"><span>' + $(e).text() + '</span></li>';
 			}).get();
 			self.after($('<ul class="searchBoxElement"></ul>').hide());
 
 			// ダミーリストの表示幅をセレクトボックスにあわせる
-			var refineTextWidth = (settings.elementWidth) ? settings.elementWidth : self.width();
-			$('.searchBoxElement').css({
-				'min-width' : refineTextWidth + 'px'
-			});
+			var refineTextWidth = self.width();
 
 			// 元のセレクトボックスは非表示にする
 			self.hide();
@@ -54,15 +49,16 @@
 			var changeSearchBoxElement = function() {
 				if (searchWord !== '') {
 					var matcher = new RegExp(searchWord.replace(/\\/g, '\\\\'), "i");
-					var filterTarget = $(visibleTarget.slice().join('')); // 配列のコピー
+					var filterTarget = $(visibleTarget.join()); // 配列のコピー
 					filterTarget = filterTarget.filter(function(){
 						return $(this).text().match(matcher);
 					});
 					$('.searchBoxElement').empty();
-					$('.searchBoxElement').html(filterTarget.slice(0, settings.optionMaxSize));
+					$('.searchBoxElement').html(filterTarget);
 					$('.searchBoxElement').show();
 				} else {
-					$('.searchBoxElement').html(visibleTarget.slice(0, settings.optionMaxSize));
+					$('.searchBoxElement').empty();
+					$('.searchBoxElement').html(visibleTarget.slice(0, settings.optionMaxSize).join(''));
 					$('.searchBoxElement').show();
 				}
 				
@@ -162,7 +158,6 @@
 
 	$.fn.searchBox.defaults = {
 		selectCallback: null, // 選択後に呼ばれるコールバック
-		elementWidth: null, // セレクトボックスの表示幅
 		optionMaxSize: 100, // セレクトボックス内に表示する最大数
 		mode: MODE.INPUT // 表示モード
 	};

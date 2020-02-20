@@ -568,7 +568,8 @@ z-index: 10;
   list-style: none;
   z-index: 1;
   -ms-overflow-style: none;
-  scrollbar-width: none;
+	scrollbar-width: none;
+	width: 230px;
 }
 .searchBoxElement span{
   padding: 0 5px;
