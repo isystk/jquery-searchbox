@@ -543,43 +543,41 @@ font-size: 1.0em;
 
 /* 見出しナビゲーション */
 #sticky-navigator {
-	background:#fff;
-	line-height: 1.6;
-	color: #555;
-	font-size: 0.9em;
-	box-shadow:0px 0px 5px;
-	border:1px solid #f4f4f4;
-	margin-bottom: 48px;
-	padding: 10px
-	}
-	#sticky-navigator ul {
-	padding: 0px;
-	}
-	#sticky-navigator ul li:first-child {
-	border-top: none;
-	padding-top: 8px;
-	}
-	#sticky-navigator ul li {
-	list-style: none;
-	line-height: 1.4;
-	}
-	#sticky-navigator ul li.nav-h2 {
-	padding-top: 6px;
-	padding-bottom: 6px;
-	}
-	#sticky-navigator ul li.nav-h3 {
-	margin-left: 10px;
-	}
-	#sticky-navigator ul li.current {
-	background-color: #dadde1;
-	}
-	#sticky-navigator {
-	position: -webkit-sticky;
-	position: sticky;
-	top: 5px;
-	}
-	
-
+background:#fff;
+line-height: 1.6;
+color: #555;
+font-size: 0.9em;
+box-shadow:0px 0px 5px;
+border:1px solid #f4f4f4;
+margin-bottom: 48px;
+padding: 10px
+}
+#sticky-navigator ul {
+padding: 0px;
+}
+#sticky-navigator ul li:first-child {
+border-top: none;
+padding-top: 8px;
+}
+#sticky-navigator ul li {
+list-style: none;
+line-height: 1.4;
+}
+#sticky-navigator ul li.nav-h2 {
+padding-top: 6px;
+padding-bottom: 6px;
+}
+#sticky-navigator ul li.nav-h3 {
+margin-left: 10px;
+}
+#sticky-navigator ul li.current {
+background-color: #dadde1;
+}
+#sticky-navigator {
+position: -webkit-sticky;
+position: sticky;
+top: 5px;
+}
 
  /* 検索機能付きセレクトボックス */
  .searchBoxElement{
