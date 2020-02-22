@@ -562,6 +562,8 @@ font-size: 1.0em;
 	#sticky-navigator ul li {
 	list-style: none;
 	line-height: 1.4;
+	}
+	#sticky-navigator ul li.nav-h2 {
 	padding-top: 6px;
 	padding-bottom: 6px;
 	}
