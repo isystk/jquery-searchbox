@@ -212,7 +212,9 @@ height: 100%;
 .wrap{
 max-width:1200px;
 margin:0 auto;
+/* sticky が効かなくなるのでコメントアウト
 overflow: hidden;
+*/
 background:#f4f4f4;
 }
 
@@ -283,12 +285,6 @@ flex:0 0 auto;
 --------------------------------------------------------------------*/
 
 
-.wrap{
-max-width:1200px;
-margin:0 auto;
-overflow: hidden;
-background:#f4f4f4;
-}
 header{
 background: #575757;
 text-align:center;
@@ -311,7 +307,6 @@ padding: 8px 16px;
 .content main {
 margin-bottom: 64px;
 width:100%;
-padding-top: 16px;
 }
 
 /* トップ */
@@ -544,14 +539,44 @@ margin: 25px 0 13px 0;
 font-size: 1.0em;
 }
 
-.sidebar-wrapper.fixed {
-position: fixed;
-top: 0;
-z-index: 10;
 }
 
-}
-
+/* 見出しナビゲーション */
+#sticky-navigator {
+	background:#fff;
+	line-height: 1.6;
+	color: #555;
+	font-size: 0.9em;
+	box-shadow:0px 0px 5px;
+	border:1px solid #f4f4f4;
+	margin-bottom: 48px;
+	padding: 10px
+	}
+	#sticky-navigator ul {
+	padding: 0px;
+	}
+	#sticky-navigator ul li:first-child {
+	border-top: none;
+	padding-top: 8px;
+	}
+	#sticky-navigator ul li {
+	list-style: none;
+	line-height: 1.4;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	}
+	#sticky-navigator ul li.nav-h3 {
+	margin-left: 10px;
+	}
+	#sticky-navigator ul li.current {
+	background-color: #dadde1;
+	}
+	#sticky-navigator {
+	position: -webkit-sticky;
+	position: sticky;
+	top: 5px;
+	}
+	
 
 
  /* 検索機能付きセレクトボックス */
