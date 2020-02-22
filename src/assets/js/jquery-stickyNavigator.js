@@ -1,7 +1,7 @@
 
 (function($) {
   /*
-   * ページ内インデックスナビゲーション
+   * ページ内見出しナビゲーション
 	 */
 	$.fn.stickyNavigator = function(opts) {
 
@@ -46,12 +46,22 @@
 		var findIndexNum = function() {
 			var scrollTop = $(window).scrollTop();
 			var num = '';
-			$('.js-nav').each(function () {
+			if (scrollTop < $('.js-nav:eq(0)').offset().top) {
+				return num;
+			}
+			$('.js-nav').each(function (i) {
+				var idx = (i-1);
+				if (i === 0) {
+					return;
+				}
 				if (scrollTop <= $(this).offset().top) {
-					num = $(this).data('num');
+					num = $('.js-nav:eq('+idx+')').data('num');
 					return false;
 				}
 			});
+			if (num === '') {
+				num = $('.js-nav:last').data('num');
+			}
 			return num;
 		}
 
