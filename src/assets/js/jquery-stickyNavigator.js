@@ -54,7 +54,7 @@
 				if (i === 0) {
 					return;
 				}
-				if (scrollTop <= $(this).offset().top) {
+				if (scrollTop < $(this).offset().top) {
 					num = $('.js-nav:eq('+idx+')').data('num');
 					return false;
 				}
