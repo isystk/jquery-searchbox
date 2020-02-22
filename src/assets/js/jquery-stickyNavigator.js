@@ -50,12 +50,11 @@
 				return num;
 			}
 			$('.js-nav').each(function (i) {
-				var idx = (i-1);
 				if (i === 0) {
 					return;
 				}
-				if (scrollTop < $(this).offset().top) {
-					num = $('.js-nav:eq('+idx+')').data('num');
+				if (Math.floor(scrollTop) < (Math.floor($(this).offset().top)-1)) {
+					num = $('.js-nav:eq('+(i-1)+')').data('num');
 					return false;
 				}
 			});
